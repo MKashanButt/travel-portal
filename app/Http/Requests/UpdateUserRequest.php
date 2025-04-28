@@ -25,6 +25,7 @@ class UpdateUserRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $this->user->id],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'], // Optional but must be valid
             'role_id' => ['nullable', 'exists:roles,id'],
+            'company' => ['nullable', 'string'],
         ];
     }
 
@@ -45,7 +46,6 @@ class UpdateUserRequest extends FormRequest
 
             'password.string' => 'The password must be a valid text.',
             'password.min' => 'The password must be at least 8 characters long.',
-            'password.confirmed' => 'The password confirmation does not match.',
 
             'role_id.exists' => 'The selected role is invalid.',
         ];

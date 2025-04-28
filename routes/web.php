@@ -5,6 +5,7 @@ use App\Http\Controllers\AirlinesController;
 use App\Http\Controllers\CreditTypeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GdsController;
+use App\Http\Controllers\LimitController;
 use App\Http\Controllers\PccController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -27,7 +28,9 @@ Route::middleware('auth')->group(function () {
         ->name('profile.destroy');
 
     // Resource routes for all models
-    Route::resource('agent-sales', AgentSaleController::class);
+    Route::middleware('checkLimit')->group(function () {
+        Route::resource('agent-sales', AgentSaleController::class);
+    });
     Route::resource('airlines', AirlinesController::class);
     Route::middleware('admin')->group(function () {
         Route::resource('credit-types', CreditTypeController::class);
@@ -35,6 +38,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('pccs', PccController::class);
         Route::resource('roles', RoleController::class);
         Route::resource('visa-types', VisaTypesController::class);
+        Route::resource('limit', LimitController::class);
         Route::resource('users', UserController::class);
     });
 });

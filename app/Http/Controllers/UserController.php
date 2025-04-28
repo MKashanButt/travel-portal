@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\AgentSale;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -50,7 +51,8 @@ class UserController extends Controller
      */
     public function show(User $user): View
     {
-        return view('users.show', compact('user'));
+        $tickets = AgentSale::where('user_id', $user->id)->get(['pnr_number', 'pax_name', 'amount', 'created_at']);
+        return view('users.show', compact('user', 'tickets'));
     }
 
     /**

@@ -25,6 +25,7 @@ class StoreUserRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'], // Ensure password confirmation
             'role_id' => ['nullable', 'exists:roles,id'],
+            'company' => ['nullable', 'string']
         ];
     }
 

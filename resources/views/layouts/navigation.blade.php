@@ -66,6 +66,15 @@
                 </div>
             </div>
             <div class="mt-3 space-y-1">
+                <x-nav-link class="flex justify-between py-2" :href="Auth::user()->isAdmin() ? route('limit.index') : ''">
+                    <div class="font-medium">Limit</div>
+                    @if (!Auth::user()->isAdmin())
+                        <div class="text-xs text-[#706f6c] dark:text-[#A1A09A]">
+                            {{ formatNumber($limit_used) }}/{{ formatNumber($limit) }}</div>
+                    @endif
+                </x-nav-link>
+            </div>
+            <div class="space-y-1">
                 @if (Auth::check() && Auth::user()->isAdmin())
                     <x-nav-link :href="route('profile.edit')" class="block py-2">
                         {{ __('Profile') }}

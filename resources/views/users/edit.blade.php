@@ -24,7 +24,7 @@
                         <div>
                             <x-input-label for="name" :value="__('User Name')" />
                             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full"
-                                :value="old('name', $user->name)" required autofocus />
+                                :value="old('name', $user->name)" />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
 
@@ -32,25 +32,25 @@
                         <div>
                             <x-input-label for="email" :value="__('Email')" />
                             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full"
-                                :value="old('email', $user->email)" required autofocus />
+                                :value="old('email', $user->email)" />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
 
-
+                        <!-- Password -->
                         <div>
                             <x-input-label for="password" :value="__('Password')" />
-                            <x-text-input id="password" name="password" type="password" class="mt-1 block w-full"
-                                :value="old('password', $user->password)" required autofocus />
+                            <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" />
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
 
+                        <!-- Company -->
                         <div>
-                            <x-input-label for="password" :value="__('Password')" />
-                            <x-text-input id="password" name="password" type="password" class="mt-1 block w-full"
-                                :value="old('password', $user->password)" required autofocus />
-                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                            <x-input-label for="company" :value="__('Company')" />
+                            <x-text-input id="company" name="company" type="text" class="mt-1 block w-full" />
+                            <x-input-error :messages="$errors->get('company')" class="mt-2" />
                         </div>
 
+                        <!-- Roles -->
                         <div>
                             <x-input-label for="role" :value="__('Role')" />
                             <x-select-input id="role" name="role">

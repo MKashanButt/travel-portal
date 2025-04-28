@@ -68,7 +68,7 @@
                                     @if ($isAdmin)
                                         <td class="table-cell">
                                             <x-secondary-button>
-                                                {{ $sale->user->name }}
+                                                {{ $sale->user->name ?? '' }}
                                             </x-secondary-button>
                                         </td>
                                     @endif

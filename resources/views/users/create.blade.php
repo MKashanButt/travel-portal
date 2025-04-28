@@ -51,6 +51,13 @@
                         </div>
 
                         <div>
+                            <x-input-label for="company" :value="__('Company')" />
+                            <x-text-input id="company" name="company" type="text" class="mt-1 block w-full"
+                                required autofocus />
+                            <x-input-error :messages="$errors->get('company')" class="mt-2" />
+                        </div>
+
+                        <div>
                             <x-input-label for="role" :value="__('Role')" />
                             <x-select-input id="role" name="role">
                                 <option value="" disabled>Select Role</option>

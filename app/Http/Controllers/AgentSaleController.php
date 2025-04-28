@@ -8,6 +8,7 @@ use App\Models\AgentSale;
 use App\Models\Airlines;
 use App\Models\CreditType;
 use App\Models\Gds;
+use App\Models\Limit;
 use App\Models\Pcc;
 use App\Models\VisaTypes;
 use Illuminate\Http\RedirectResponse;
@@ -22,9 +23,9 @@ class AgentSaleController extends Controller
     public function index(): View
     {
         if (Auth::check() && Auth::user()->isAdmin()) {
-            $agentSales = AgentSale::with(['creditType', 'airline', 'gds', 'pcc', 'visaType', 'user'])->paginate(10);
+            $agentSales = AgentSale::with(['creditType', 'airline', 'gds', 'pcc', 'visaType', 'user'])->orderBy('id', 'DESC')->paginate(10);
         } else {
-            $agentSales = AgentSale::where('user_id', Auth::id())->with(['creditType', 'airline', 'gds', 'pcc', 'visaType'])->paginate(10);
+            $agentSales = AgentSale::where('user_id', Auth::id())->with(['creditType', 'airline', 'gds', 'pcc', 'visaType'])->orderBy('id', 'DESC')->paginate(10);
         }
         return view('agent-sales.index', compact('agentSales'));
     }
@@ -37,7 +38,7 @@ class AgentSaleController extends Controller
         $creditTypes = CreditType::all();
         $airlines = Airlines::all();
         $gdsList = Gds::all();
-        $pccs = Pcc::all();
+        $pccs = Auth::user()->isAdmin() ? Pcc::all() : Pcc::where('user_id', Auth::id())->get();
         $visaTypes = VisaTypes::all();
 
         return view('agent-sales.create', compact('creditTypes', 'airlines', 'gdsList', 'pccs', 'visaTypes'));
@@ -49,11 +50,35 @@ class AgentSaleController extends Controller
     public function store(StoreAgentSaleRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $data["user_id"] = Auth::id();
-        AgentSale::create($data);
+        $data['user_id'] = Auth::id();
+        $user = Auth::user();
+
+        // Admins bypass limits
+        if ($user->isAdmin()) {
+            AgentSale::create($data);
+            return redirect()->route('agent-sales.index')
+                ->with('success', 'Agent sale created successfully.');
+        }
+
+        // Non-admins: enforce limits
+        $limit = Limit::where('user_id', $user->id)->first();
+
+        if (!$limit) {
+            return redirect()->route('agent-sales.index')
+                ->with('danger', 'No limit assigned to your account.');
+        }
+
+        $usedLimit = AgentSale::where('user_id', $user->id)->sum('amount');
+        $remainingLimit = $limit->limit - $usedLimit;
+
+        if ($remainingLimit > 0 && $data['amount'] <= $remainingLimit) {
+            AgentSale::create($data);
+            return redirect()->route('agent-sales.index')
+                ->with('success', 'Agent sale created successfully.');
+        }
 
         return redirect()->route('agent-sales.index')
-            ->with('success', 'Agent sale created successfully.');
+            ->with('error', 'Limit exceeded.');
     }
 
     /**

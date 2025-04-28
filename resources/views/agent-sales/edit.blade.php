@@ -138,10 +138,10 @@
                                             {{ old('status', strtolower($agentSale->status)) == 'waiting' ? 'selected' : '' }}>
                                             Waiting</option>
                                         <option value="processing"
-                                            {{ old('status', strtolower($agentSale->status)) == 'waiting' ? 'selected' : '' }}>
+                                            {{ old('status', strtolower($agentSale->status)) == 'processing' ? 'selected' : '' }}>
                                             Processing</option>
                                         <option value="issued"
-                                            {{ old('status', strtolower($agentSale->status)) == 'waiting' ? 'selected' : '' }}>
+                                            {{ old('status', strtolower($agentSale->status)) == 'issued' ? 'selected' : '' }}>
                                             Issued</option>
                                     </x-select-input>
                                     <x-input-error :messages="$errors->get('visa_type_id')" class="mt-2" />

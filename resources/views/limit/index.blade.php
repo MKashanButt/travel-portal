@@ -2,11 +2,11 @@
     <x-slot name="header">
         <div class="flex justify-between">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Credit Types') }}
+                {{ __('Limits') }}
             </h2>
-            <a href="{{ route('credit-types.create') }}"
+            <a href="{{ route('limit.create') }}"
                 class="inline-flex items-center px-4 py-2 bg-[#1b1b18] dark:bg-[#eeeeec] border border-transparent rounded-sm text-sm text-white dark:text-[#1C1C1A] hover:bg-black dark:hover:bg-white transition-colors duration-200">
-                {{ __('Add New Credit Type') }}
+                {{ __('Add New Account Limit') }}
             </a>
         </div>
     </x-slot>
@@ -21,28 +21,33 @@
                             <tr>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-[#706f6c] dark:text-[#A1A09A] uppercase tracking-wider">
-                                    Name</th>
+                                    Agent</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-[#706f6c] dark:text-[#A1A09A] uppercase tracking-wider">
+                                    Limit</th>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-[#706f6c] dark:text-[#A1A09A] uppercase tracking-wider">
                                     Actions</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white dark:bg-[#161615] divide-y divide-[#e3e3e0] dark:divide-[#3E3E3A]">
-                            @foreach ($creditTypes as $creditType)
+                            @foreach ($data as $item)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $creditType->name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $item->user->name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $item->limit }}
+                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-3">
-                                        <a href="{{ route('credit-types.show', $creditType) }}"
+                                        <a href="{{ route('limit.show', $item) }}"
                                             class="text-blue dark:text-[#FF4433] hover:underline underline-offset-4">View</a>
-                                        <a href="{{ route('credit-types.edit', $creditType) }}"
+                                        <a href="{{ route('limit.edit', $item) }}"
                                             class="text-green-700 dark:text-[#FF4433] hover:underline underline-offset-4">Edit</a>
-                                        <form action="{{ route('credit-types.destroy', $creditType) }}" method="POST"
+                                        <form action="{{ route('limit.destroy', $item) }}" method="POST"
                                             class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
                                                 class="text-[#f53003] dark:text-[#FF4433] hover:underline underline-offset-4"
-                                                onclick="return confirm('Are you sure you want to delete this credit type?')">
+                                                onclick="return confirm('Are you sure you want to delete this PCC?')">
                                                 Delete
                                             </button>
                                         </form>
@@ -52,7 +57,7 @@
                         </tbody>
                     </table>
                     <div class="mt-4">
-                        {{ $creditTypes->links() }}
+                        {{ $data->links() }}
                     </div>
                 </div>
             </div>

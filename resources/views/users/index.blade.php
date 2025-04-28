@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('Users') }}
             </h2>
-            <a href="{{ route('users.create') }}"
+            <a href="/register"
                 class="inline-flex items-center px-4 py-2 bg-[#1b1b18] dark:bg-[#eeeeec] border border-transparent rounded-sm text-sm text-white dark:text-[#1C1C1A] hover:bg-black dark:hover:bg-white transition-colors duration-200">
                 {{ __('Add New User') }}
             </a>
@@ -34,12 +34,12 @@
                                 <tr>
                                     <td class="table-cell">{{ $user->name }}</td>
                                     <td class="table-cell">{{ $user->email }}</td>
-                                    <td class="table-cell">{{ $user->role->name }}</td>
+                                    <td class="table-cell">{{ ucwords($user->role->name) }}</td>
                                     <td class="table-cell font-medium space-x-3">
                                         <a href="{{ route('users.show', $user) }}"
-                                            class="text-[#f53003] dark:text-[#FF4433] hover:underline underline-offset-4">View</a>
+                                            class="text-blue dark:text-[#FF4433] hover:underline underline-offset-4">View</a>
                                         <a href="{{ route('users.edit', $user) }}"
-                                            class="text-[#f53003] dark:text-[#FF4433] hover:underline underline-offset-4">Edit</a>
+                                            class="text-green-700 dark:text-[#FF4433] hover:underline underline-offset-4">Edit</a>
                                         <form action="{{ route('users.destroy', $user) }}" method="POST"
                                             class="inline">
                                             @csrf
