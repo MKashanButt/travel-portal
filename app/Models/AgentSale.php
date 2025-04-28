@@ -35,6 +35,7 @@ class AgentSale extends Model
         'comment',
         'user_id',
         'status',
+        'type',
     ];
 
     /**
