@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignId('visa_type_id')->nullable()->constrained('visa_types')->onDelete('SET NULL');
             $table->string('comment')->nullable();
             $table->enum('status', ["Waiting", "Processing", "Issued"]);
+            $table->enum('type', ["ticket", "Void", "Refund"])->default('ticket');
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('SET NULL');
             $table->timestamps();
         });
