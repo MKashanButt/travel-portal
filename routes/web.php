@@ -8,6 +8,7 @@ use App\Http\Controllers\GdsController;
 use App\Http\Controllers\LimitController;
 use App\Http\Controllers\PccController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RefundController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisaTypesController;
@@ -31,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware('checkLimit')->group(function () {
         Route::resource('agent-sales', AgentSaleController::class);
     });
+    Route::resource('refund', RefundController::class);
     Route::resource('airlines', AirlinesController::class);
     Route::middleware('admin')->group(function () {
         Route::resource('credit-types', CreditTypeController::class);

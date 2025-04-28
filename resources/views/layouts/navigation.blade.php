@@ -15,8 +15,16 @@
             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="block py-2">
                 {{ __('Dashboard') }}
             </x-nav-link>
+        </div>
+
+        <div class="px-4 mt-6 space-y-1">
+            <p class="text-xs font-semibold text-[#706f6c] dark:text-[#A1A09A] uppercase tracking-wider mb-2">Ticketing
+            </p>
             <x-nav-link :href="route('agent-sales.index')" :active="request()->routeIs('agent-sales.*')" class="block py-2">
                 {{ __('Agent Sales') }}
+            </x-nav-link>
+            <x-nav-link :href="route('refund.index')" :active="request()->routeIs('refund.*')" class="block py-2">
+                {{ __('Refunds') }}
             </x-nav-link>
         </div>
 
