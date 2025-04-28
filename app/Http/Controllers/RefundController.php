@@ -68,7 +68,7 @@ class RefundController extends Controller
     {
         $agentSale->delete();
 
-        return redirect()->route('agent-sales.index')
-            ->with('success', 'Agent sale deleted successfully.');
+        return redirect()->route('refund.index')
+            ->with('success', 'Refund ticket deleted successfully.');
     }
 }
