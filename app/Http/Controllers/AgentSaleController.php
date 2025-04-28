@@ -23,9 +23,16 @@ class AgentSaleController extends Controller
     public function index(): View
     {
         if (Auth::check() && Auth::user()->isAdmin()) {
-            $agentSales = AgentSale::with(['creditType', 'airline', 'gds', 'pcc', 'visaType', 'user'])->orderBy('id', 'DESC')->paginate(10);
+            $agentSales = AgentSale::with(['creditType', 'airline', 'gds', 'pcc', 'visaType', 'user'])
+                ->where('type', 'ticket')
+                ->orderBy('id', 'DESC')
+                ->paginate(10);
         } else {
-            $agentSales = AgentSale::where('user_id', Auth::id())->with(['creditType', 'airline', 'gds', 'pcc', 'visaType'])->orderBy('id', 'DESC')->paginate(10);
+            $agentSales = AgentSale::where('user_id', Auth::id())
+                ->where('type', 'ticket')
+                ->with(['creditType', 'airline', 'gds', 'pcc', 'visaType'])
+                ->orderBy('id', 'DESC')
+                ->paginate(10);
         }
         return view('agent-sales.index', compact('agentSales'));
     }
@@ -61,14 +68,17 @@ class AgentSaleController extends Controller
         }
 
         // Non-admins: enforce limits
-        $limit = Limit::where('user_id', $user->id)->first();
+        $limit = Limit::where('user_id', $user->id)
+            ->first();
 
         if (!$limit) {
             return redirect()->route('agent-sales.index')
                 ->with('danger', 'No limit assigned to your account.');
         }
 
-        $usedLimit = AgentSale::where('user_id', $user->id)->sum('amount');
+        $usedLimit = AgentSale::where('user_id', $user->id)
+            ->where('type', 'ticket')
+            ->sum('amount');
         $remainingLimit = $limit->limit - $usedLimit;
 
         if ($remainingLimit > 0 && $data['amount'] <= $remainingLimit) {
