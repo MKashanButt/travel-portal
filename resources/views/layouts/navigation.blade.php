@@ -26,6 +26,9 @@
             <x-nav-link :href="route('refund.index')" :active="request()->routeIs('refund.*')" class="block py-2">
                 {{ __('Refunds') }}
             </x-nav-link>
+            <x-nav-link :href="route('void.index')" :active="request()->routeIs('void.*')" class="block py-2">
+                {{ __('Void') }}
+            </x-nav-link>
         </div>
 
         <!-- Travel Section -->

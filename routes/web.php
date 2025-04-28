@@ -12,6 +12,7 @@ use App\Http\Controllers\RefundController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisaTypesController;
+use App\Http\Controllers\VoidController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('agent-sales', AgentSaleController::class);
     });
     Route::resource('refund', RefundController::class);
+    Route::resource('void', VoidController::class);
     Route::resource('airlines', AirlinesController::class);
     Route::middleware('admin')->group(function () {
         Route::resource('credit-types', CreditTypeController::class);
