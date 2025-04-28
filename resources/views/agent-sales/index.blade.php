@@ -67,9 +67,11 @@
                                     </td>
                                     @if ($isAdmin)
                                         <td class="table-cell">
-                                            <x-secondary-button>
-                                                {{ $sale->user->name ?? '' }}
-                                            </x-secondary-button>
+                                            @isset($sale->user->name)
+                                                <x-secondary-button>
+                                                    {{ $sale->user->name ?? '' }}
+                                                </x-secondary-button>
+                                            @endisset
                                         </td>
                                     @endif
                                     <td class="table-cell space-x-3">
