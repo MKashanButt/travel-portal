@@ -2,16 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreAgentSaleRequest;
 use App\Http\Requests\StoreRefundRequest;
-use App\Http\Requests\UpdateAgentSaleRequest;
 use App\Models\AgentSale;
-use App\Models\Airlines;
-use App\Models\CreditType;
-use App\Models\Gds;
-use App\Models\Limit;
-use App\Models\Pcc;
-use App\Models\VisaTypes;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
