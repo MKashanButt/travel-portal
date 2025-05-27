@@ -16,26 +16,31 @@
             <div
                 class="bg-white dark:bg-[#161615] overflow-hidden shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-[#EDEDEC]">
-                    <table class="table">
-                        <thead class="table-head">
+                    <table class="min-w-full divide-y divide-[#e3e3e0] dark:divide-[#3E3E3A]">
+                        <thead class="bg-[#FDFDFC] dark:bg-[#161615]">
                             <tr>
-                                <th class="table-head-cell">
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-[#706f6c] dark:text-[#A1A09A] uppercase tracking-wider">
                                     Name</th>
-                                <th class="table-head-cell">
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-[#706f6c] dark:text-[#A1A09A] uppercase tracking-wider">
                                     Email</th>
-                                <th class="table-head-cell">
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-[#706f6c] dark:text-[#A1A09A] uppercase tracking-wider">
                                     Role</th>
-                                <th class="table-head-cell">
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-[#706f6c] dark:text-[#A1A09A] uppercase tracking-wider">
                                     Actions</th>
                             </tr>
                         </thead>
-                        <tbody class="table-body">
+                        <tbody class="bg-white dark:bg-[#161615] divide-y divide-[#e3e3e0] dark:divide-[#3E3E3A]">
                             @foreach ($users as $user)
                                 <tr>
-                                    <td class="table-cell">{{ $user->name }}</td>
-                                    <td class="table-cell">{{ $user->email }}</td>
-                                    <td class="table-cell">{{ ucwords($user->role->name) }}</td>
-                                    <td class="table-cell font-medium space-x-3">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $user->name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $user->email }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ ucwords($user->role->name) }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-3">
                                         <a href="{{ route('users.show', $user) }}"
                                             class="text-blue dark:text-[#FF4433] hover:underline underline-offset-4">View</a>
                                         <a href="{{ route('users.edit', $user) }}"

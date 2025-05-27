@@ -20,34 +20,40 @@
             <div
                 class="bg-white dark:bg-[#161615] overflow-hidden shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
                 <div class="p-6 text-gray-900 dark:text-[#EDEDEC]">
-                    <table class="table">
-                        <thead class="table-head">
+                    <table class="min-w-full divide-y divide-[#e3e3e0] dark:divide-[#3E3E3A]">
+                        <thead class="bg-[#FDFDFC] dark:bg-[#161615]">
                             <tr>
-                                <th class="table-head-cell">
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-[#706f6c] dark:text-[#A1A09A] uppercase tracking-wider">
                                     PNR</th>
-                                <th class="table-head-cell">
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-[#706f6c] dark:text-[#A1A09A] uppercase tracking-wider">
                                     Passenger</th>
-                                <th class="table-head-cell">
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-[#706f6c] dark:text-[#A1A09A] uppercase tracking-wider">
                                     Amount</th>
-                                <th class="table-head-cell">
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-[#706f6c] dark:text-[#A1A09A] uppercase tracking-wider">
                                     Comment</th>
                                 @if ($isAdmin)
-                                    <th class="table-head-cell">
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium text-[#706f6c] dark:text-[#A1A09A] uppercase tracking-wider">
                                         Agent</th>
-                                    <th class="table-head-cell">
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium text-[#706f6c] dark:text-[#A1A09A] uppercase tracking-wider">
                                         Actions</th>
                                 @endif
                             </tr>
                         </thead>
-                        <tbody class="table-body">
+                        <tbody class="bg-white dark:bg-[#161615] divide-y divide-[#e3e3e0] dark:divide-[#3E3E3A]">
                             @foreach ($agentSales as $sale)
                                 <tr>
-                                    <td class="table-cell">{{ $sale->pnr_number }}</td>
-                                    <td class="table-cell">{{ $sale->pax_name }}</td>
-                                    <td class="table-cell">{{ $sale->amount }}</td>
-                                    <td class="table-cell">{{ $sale->comment }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $sale->pnr_number }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $sale->pax_name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $sale->amount }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $sale->comment }}</td>
                                     @if ($isAdmin)
-                                        <td class="table-cell">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
                                             @isset($sale->user->name)
                                                 <x-secondary-button>
                                                     {{ $sale->user->name ?? '' }}
@@ -56,7 +62,7 @@
                                         </td>
                                     @endif
                                     @if ($isAdmin)
-                                        <td class="table-cell space-x-3">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm space-x-3">
                                             <a href="{{ route('agent-sales.show', $sale) }}"
                                                 class="dark:text-[#FF4433] hover:underline underline-offset-4">View</a>
                                             <form action="{{ route('void.destroy', $sale) }}" method="POST"
